@@ -1916,6 +1916,7 @@ MonoBehaviour:
   isGrounded: 0
   isSprinting: 0
   cam: {fileID: 1566350816}
+  rb: {fileID: 843180083}
   walkSpeed: 10
   sprintSpeed: 20
   jumpForce: 5

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public bool isSprinting;
 
     public Transform cam;
+    public Rigidbody rb;
     public World world;
 
     public float walkSpeed = 3f;
@@ -39,7 +40,11 @@ public class Player : MonoBehaviour
 
         transform.Rotate(Vector3.up * mouseHorizontal * mouseSensibility);
         cam.Rotate(Vector3.right * -mouseVertical * mouseSensibility);
-        transform.Translate(velocity, Space.World);
+        // transform.Translate(velocity, Space.World);
+        rb.AddForce(velocity * 50f, ForceMode.Force);
+        float velocityX = Mathf.Clamp(rb.linearVelocity.x, 0, sprintSpeed);
+        float velocityZ = Mathf.Clamp(rb.linearVelocity.z, 0, sprintSpeed);
+        // rb.linearVelocity = new Vector3(velocityX, rb.linearVelocity.y, velocityZ);
     }
 
     private void Update()
