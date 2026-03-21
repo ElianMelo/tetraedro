@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Transform cam;
     public Rigidbody rb;
     public World world;
+    public Transform visuals;
 
     public float walkSpeed = 3f;
     public float sprintSpeed = 6f;
@@ -38,10 +39,23 @@ public class Player : MonoBehaviour
         if (jumpRequest)
             Jump();
 
+        visuals.transform.forward = cam.forward;
+
+        if(horizontal > 0)
+        {
+            visuals.transform.rotation = visuals.transform.rotation * Quaternion.Euler(0f, 26f, 0f);
+        } else if(horizontal < 0)
+        {
+            visuals.transform.rotation = visuals.transform.rotation * Quaternion.Euler(0f, -26f, 0f);
+        } else
+        {
+            visuals.transform.rotation = visuals.transform.rotation * Quaternion.Euler(0f, 0f, 0f);
+        }
+
         transform.Rotate(Vector3.up * mouseHorizontal * mouseSensibility);
         cam.Rotate(Vector3.right * -mouseVertical * mouseSensibility);
-        // transform.Translate(velocity, Space.World);
-        rb.AddForce(velocity * 50f, ForceMode.Force);
+        transform.Translate(velocity, Space.World);
+        //rb.AddForce(velocity * 50f, ForceMode.Force);
         float velocityX = Mathf.Clamp(rb.linearVelocity.x, 0, sprintSpeed);
         float velocityZ = Mathf.Clamp(rb.linearVelocity.z, 0, sprintSpeed);
         // rb.linearVelocity = new Vector3(velocityX, rb.linearVelocity.y, velocityZ);
