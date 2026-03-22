@@ -5,5 +5,7 @@ public struct InputComponent : IComponentData
 {
     public float2 movement;
     public float2 mousePos;
-    public bool pressingLMB;
+    public float forkDirection;
+    public float forkLever;
+    public bool pressingLMB; 
 }
